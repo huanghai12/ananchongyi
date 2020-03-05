@@ -1,0 +1,18 @@
+.pagination>li+li{
+  margin-left:1rem;
+}
+.pagination>li>a{
+  border-radius: 0.3rem;
+}
+.breadcrumb-item + .breadcrumb-item::before{
+  content:">";
+}
+.w-95{width:95%;}
+div>ul>li>a{
+font-size:13px;
+color:black;
+}
+ :active{
+   border-bottom:3px solid #00a59f;
+   border-radius:2px;
+ }

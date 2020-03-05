@@ -1,0 +1,13 @@
+@charset "utf-8";
+/*************************************
+
+* 文件名称：main.css
+* 作   者：zxl
+* 创建日期：2014-7-7
+* 内容概要: 引入样式文件
+
+*************************************/
+@import url("common.css");
+@import url("jscss.css");
+@import url("../css3/Indexcss3.css");
+@import url("../css3/animate.min.css");

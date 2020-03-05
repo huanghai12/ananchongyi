@@ -1,0 +1,144 @@
+/*************************************
+
+* 文件名称：Safety.js
+* 作   者：zxl
+* 创建日期：2014-7-7
+* 内容概要: 代码安全
+
+*************************************/
+$(function(){
+	//if(document.onkeydown==null) {document.onkeydown=look;} 	
+	
+	//判断浏览器版本
+	/*var bro=$.browser; 
+    if(bro.msie) {
+		if(bro.version=="7.0"||bro.version=="8.0"){
+			alert("您的浏览器版本太老了，不支持某些网页特效，请升级到最新版本！");
+			document.location.href="http://www.baidu.com"
+		}
+	}*/
+	/*if(bro.mozilla) {binfo="Mozilla Firefox "+bro.version;} 
+    if(bro.safari) {binfo="Apple Safari "+bro.version;} 
+    if(bro.opera) {binfo="Opera "+bro.version;} */
+	
+	!function(){
+		var cookie,
+			ua,
+			match;
+		ua=window.navigator.userAgent;
+		match=/;\s*MSIE (\d+).*?;/.exec(ua);
+		if(match&&+match[1]<9){
+			cookie=document.cookie.match(/(?:^|;)\s*ic=(\d)/);
+			if(cookie&&cookie[1]){
+				return ;
+			}
+			$("body").prepend([
+				"<div id='js-compatible' class='compatible-contianer'>",
+					"<p class='cpt-ct'><i></i>您的浏览器版本过低。为保证最佳学习体验，<a href='/static/html/browser.html'>请点此更新高版本浏览器</a></p>",
+					"<div class='cpt-handle'><a href='javascript:;' class='cpt-agin'>以后再说</a><a href='javascript:;' class='cpt-close'><i></i></a></div>",
+				"</div>"
+			].join(""));
+			
+			$("#js-compatible .cpt-agin").click(function(){
+				var d=new Date();
+				d.setTime(d.getTime()+30*24*3600*1000);
+				//d.setTime(d.getTime()+60*1000);
+				document.cookie="ic=1; expires="+d.toGMTString()+"; path=/";
+				$("#js-compatible").remove();
+			});
+			$("#js-compatible .cpt-close").click(function(){
+				$("#js-compatible").remove();
+			});
+			
+		}
+	}();
+	
+	//禁止右键点击
+	// $(document).bind("contextmenu",function(e){return false;}); 
+	 
+
+	   document.onkeydown = function(e) { 
+	      //禁止ctrl+s
+	        e = e || window.event; 
+            if ((e.which || e.keyCode) == 83 && e.ctrlKey) { 
+			  setTimeout(function(){ 
+			  // ※这里执行将页面数据保存到db的方法 
+			  },1)
+			  e.keyCode = 0;
+			  if (e.preventDefault) { 
+			   // firefox                 
+			   e.preventDefault();  
+			   } else { 
+			      // other                
+				  e.returnValue = false;  
+			  } 
+		 } else if(e.keyCode == 123) { 
+				 //禁止f12键
+		        //event.keyCode = 0; 
+			   // window.location.href='http://www.baidu.com/';
+		      //return false; 
+		}  
+		  
+	             
+	 } 
+
+
+	/*返回顶部*/
+		$('#gotop').click(function(){ 
+			$('body,html').animate({
+			scrollTop: 0
+			},
+			800);//点击回到顶部按钮，缓懂回到顶部,数字越小越快
+			return false;  
+	  	});
+	   //右侧漂浮框
+	   $(window).scroll(function(){
+			t = $(document).scrollTop();
+			if(t>500){
+			  $('.fd_r').fadeIn('slow');
+			}else{
+			  $('.fd_r').fadeOut('slow');
+			}
+			if(t > 50){
+				$('#gotop').fadeIn('slow');
+			}else{
+				$('#gotop').fadeOut('slow');
+			}       
+		   });  
+		//弹出层的关闭按钮
+	  $(".closeLayerBnt").bind("click",function(){
+			layerHide();
+	  });
+	    
+	})
+
+		//谷歌页面中按f12 返回首页
+		//function look(){ 
+		//if(event.keyCode==123){document.location.href="http://www.baidu.com"} 
+		//} 
+
+       //弹出层
+       //显示方法
+	   function layerShow(){
+		  if($(".wrapBox").length<=0){
+			$(".layerBox").before('<div class="wrapBox"></div>')
+		  }
+		  $(".wrapBox").show();
+		  $(".layerBox").show();
+		  }
+		  //隐藏方法
+	   function layerHide(){
+		  $(".wrapBox").remove();
+		  $(".layerBox").hide();
+		  }	 
+    //右侧漂浮
+    $(".fd_r_t li").click(function(event) {
+			//$(this).find("a").addClass("activep").parent().siblings().find("a").removeClass("activep");
+			  var index=$(this).index()+1
+			  var id='#'+'index_'+index
+			 $("html,body").animate({scrollTop: $(id).offset().top}, 1000);
+		   });
+
+
+
+

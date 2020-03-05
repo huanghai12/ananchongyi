@@ -1,0 +1,19 @@
+
+#foot_background_color{
+  background-color:rgba(0,0,0,0);
+}
+div>div:last-child>div{
+ border-color:#87d5d2;    
+}
+a{
+color:white;
+}
+ul {list-style: none; }
+.f_f{
+ color:white;
+}
+#foot_font_size{
+  font-size:10px;
+  background-color:#40a599;
+}
+#foot_ul{float:right}

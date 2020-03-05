@@ -1,0 +1,90 @@
+// JavaScript Document
+$(function($){
+	$.fn.extend({
+		//选项卡
+	   tab:function(o){
+		o= $.extend({
+			thumbObj:null,
+			addClass:null,
+			clickhover:null
+		}, o || {});
+		//初始化
+		$(this).eq(0).find("a").addClass(o.addClass);
+		$(o.thumbObj).eq(0).show();
+		//事件
+		$(this).bind(o.clickhover,function(){
+			var num=$(this).index();
+			$(this).find("a").addClass(o.addClass).parent().siblings().find("a").removeClass(o.addClass);
+			$(o.thumbObj).hide().eq(num).show();
+		});
+		
+	},
+	tab1:function(o){
+		o= $.extend({
+			thumbObj:null,
+			addClass:null,
+			clickhover:null
+		}, o || {});
+		//初始化
+		$(this).eq(0).addClass(o.addClass);
+		$(o.thumbObj).eq(0).show();
+		//事件
+		$(this).bind(o.clickhover,function(){
+			var num=$(this).index();
+			$(this).addClass(o.addClass).siblings().removeClass(o.addClass);
+			$(o.thumbObj).hide().eq(num).show();
+		});
+		
+	},
+	menu:function(m){
+		//二级竖起下拉
+		m=$.extend({
+			textobj:null,
+			listobj:null,
+			addClass:null
+		}, m || {});
+		//事件
+		$(this).hover(function(){
+			 $(this).find(m.textobj).addClass(m.addClass);
+			$(this).find(m.listobj).stop(false,true).slideDown(400);
+		},function(){
+			$(this).find(m.textobj).removeClass(m.addClass);
+			$(this).find(m.listobj).stop(false,true).slideUp(400);
+		});
+ 
+	},
+	leftmenu:function(l){
+	   //左侧二级下拉
+	   l=$.extend({
+		   textobj:null,
+		   listobj:null,
+		   dqtextobj:null,
+		   dqlistobj:null,
+		   addClass:null,
+		   clickhover:null
+		   
+		   
+	  }, l || {});
+	  
+	  //事件
+	  $(this).bind(l.clickhover,function(){ 
+
+		  $(l.dqtextobj).removeClass(l.addClass);
+			$(l.dqlistobj).slideUp();
+		     var dlshow=$(this).find(l.listobj).length;
+		     var dis=$(this).find(l.listobj).css("display");
+			   if(dlshow>0&&dis=="none")
+			   {
+			   $(this).find(l.textobj).addClass(l.addClass);
+			   $(this).find(l.textobj).attr("href","javascript:void(0)");
+			   $(this).find(l.listobj).stop(true,false).slideDown(200);
+			   }	  
+	  });
+	  	  
+	}
+	
+		
+ });
+
+	
+})
